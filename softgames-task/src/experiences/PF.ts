@@ -43,7 +43,7 @@ export class PheonixFire
 		const texture: Texture =Assets.get(`mote2`);
 		const length = 912/20
 		
-		let points : Point[] = [];
+		const points : Point[] = [];
 		for (let index=0;index<10;index++)
 		{
 			points.push(new Point(index*length,0));
