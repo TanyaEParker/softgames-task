@@ -1,6 +1,6 @@
 import {Application, Text} from 'pixi.js';
 import { manager } from './utilities/manager';
-
+import {MenuManager} from "./utilities/MenuManager"
 const app = new Application();
 
 async function setup()
@@ -27,18 +27,20 @@ class MainMenu
 	private app : Application;
 	private manager : manager;
 	private FPS : Text;
-
+	private MenuScreen :MenuManager
 	constructor(app:Application)
 	{
 		this.app = app;
-		this.FPS = new Text({text: 'FPS: 0', style:{ fontSize: 18, fill: 0x000000 }});
+		this.FPS = new Text({text: 'FPS: 0', style:{ fontSize: 18, fill: 'white' }});
 	    this.FPS.x = 10;
 	    this.FPS.y = 10;
 
 	    this.app.stage.addChild(this.FPS);
 	    this.app.ticker.add(() => this.updateFPS());
 
-	    this.manager = new manager(this.app,this.FPS)
+	    this.manager = new manager();
+
+	    this.MenuScreen = new MenuManager(this.setScene);
 	}
 
 	private updateFPS():void
@@ -47,18 +49,20 @@ class MainMenu
 		this.FPS.text = `FPS: ${frame}`
 	}
 
-
 	private setScene(task:string):void
 	{
 		switch(task)
 		{
 		case 'AoC':
+			console.log('Ace of Shadows');
 			this.sceneManager.loadScene(new AoC(this.app))
 			break;
 		case 'MW':
+			console.log('Magic Words');
 			this.sceneManager.loadScene(new MW(this.app))
 			break;
 		case 'PF':
+			console.log('pheonix Flame')
 			this.sceneManager.loadScene(new PF(this.app))
 			break;
 		}

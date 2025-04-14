@@ -1,5 +1,5 @@
 import { Application, Text } from 'pixi.js';
- 
+import {MenuManager} from "./MenuManager"
 export class manager
 {
   private app: Application;
@@ -31,5 +31,7 @@ export class manager
     }
     this.currentScene = newScene;
     this.currentScene.init();
+
+    const MainMenu = new MenuManager()
   }
 }
