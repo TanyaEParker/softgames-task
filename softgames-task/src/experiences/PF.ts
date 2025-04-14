@@ -1,4 +1,4 @@
-import {Application,Sprite,Assets,Texture,DisplacementFilter,Point,MeshRope,BLEND_MODES} from 'pixi.js';
+import {Application,Sprite,Assets,Texture,DisplacementFilter,Point,MeshRope} from 'pixi.js';
 import { gsap } from 'gsap';
 
 
