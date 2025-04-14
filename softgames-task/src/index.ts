@@ -31,7 +31,6 @@ class MainMenu
 	private app : Application;
 	private manager : manager;
 	private FPS : Text;
-	private MenuScreen :MenuManager
 
 	constructor(app:Application)
 	{
@@ -45,7 +44,7 @@ class MainMenu
 
 	    this.manager = new manager();
 
-	    this.MenuScreen = new MenuManager(this.setScene);
+	    new MenuManager(this.setScene);
 	}
 
 	private updateFPS():void
