@@ -6,12 +6,12 @@ export class AceOfShadows
 	private app:Application;
 	private images : {alias:string,src:string}[]=
 	[
-		{alias:'card1',src:`../assets/AoC/card1.png`},
-		{alias:'card2',src:`../assets/AoC/card2.png`},
-		{alias:'card3',src:`../assets/AoC/card3.png`},
-		{alias:'card4',src:`../assets/AoC/card4.png`},
-		{alias:'card5',src:`../assets/AoC/card5.png`},
-		{alias:'card6',src:`../assets/AoC/card6.png`},
+		{alias:'card1',src:new URL('../../assets/AoC/card1.png',import.meta.url).href},
+		{alias:'card2',src:new URL('../../assets/AoC/card2.png',import.meta.url).href},
+		{alias:'card3',src:new URL('../../assets/AoC/card3.png',import.meta.url).href},
+		{alias:'card4',src:new URL('../../assets/AoC/card4.png',import.meta.url).href},
+		{alias:'card5',src:new URL('../../assets/AoC/card5.png',import.meta.url).href},
+		{alias:'card6',src:new URL('../../assets/AoC/card6.png',import.meta.url).href},
 	];
 
 	private cardCount = 144;

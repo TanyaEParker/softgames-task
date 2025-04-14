@@ -16,8 +16,8 @@ export class PheonixFire
 		this.app = mainApp;
 		this.images = 
 		[
-			{alias:'displacement',src:'./assets/PF/displacement.png'},
-			{alias:'mote2',src:'./assets/PF/mote2.png'}
+			{alias:'displacement',src:new URL('../../assets/PF/displacement.png',import.meta.url).href},
+			{alias:'mote2',src:new URL('../../assets/PF/mote2.png',import.meta.url).href}
 		]
 
 	};

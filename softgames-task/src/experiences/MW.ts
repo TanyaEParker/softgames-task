@@ -16,16 +16,23 @@ export class MagicWords
     private app : Application;
     private APIResponse:APIOutput = {dialogue:[],emojies:[],avatars:[]};
     private Avatars : DialogueObject[] = [];
-    private Emojis : DialogueObject[] = [];
+    // private Emojis : DialogueObject[] = [];
+    
     private dialogueBox : HTMLDivElement;
-    private dialogueHolder : HTMLSpanElement;
+    private dialogueHolder1 : HTMLSpanElement;
+    private dialogueHolder2 : HTMLSpanElement;
+    private dialogueEmoji : HTMLImageElement;
+
+    private dialoguePause = 4500;
     // private avatarImages :{alias:string,src:string,parser:'texture'}[] = [];
     // private emojiImages :{alias:string,src:string,parser:'texture'}[] = [];
 
     constructor(app:Application)
     {
         this.dialogueBox = document.getElementById('MWDiaglouge') as HTMLDivElement;
-        this.dialogueHolder = document.getElementById('MWDialogueHolder') as HTMLSpanElement;
+        this.dialogueHolder1 = document.getElementById('MWDialogueHolder_1') as HTMLSpanElement;
+        this.dialogueHolder2 = document.getElementById('MWDialogueHolder_2') as HTMLSpanElement;
+        this.dialogueEmoji = document.getElementById('MWDialogueImage') as HTMLImageElement;
 
         if(!!this.dialogueBox)
         {
@@ -66,7 +73,8 @@ export class MagicWords
         {
             if(index.name != 'sad')//sad result wouldn't load - realsied too late to flag with anyone :(
             {
-                list.push({alias:index.name,src:index.url,format:'png',loadParser:'loadTextures'})
+
+                // list.push({alias:index.name,src:index.url,format:'png',loadParser:'loadTextures'})
             }
         }
         return list
@@ -97,34 +105,35 @@ export class MagicWords
             avatar.y = this.app.screen.height - (175 + avatar.height);
             avatar.visible = false;
         }
-        for(let index of this.APIResponse.emojies)
-        {
-            if(index.name == 'sad')
-            {
-            }
-            else
-            {
-                const emoji = new Sprite(Assets.get(index.name));
-                this.app.stage.addChild(emoji);
-                this.Emojis.push({alias:index.name,asset:emoji});
-                emoji.scale.set(0.75);
-                emoji.visible = false;
-            }
-        }
+        // for(let index of this.APIResponse.emojies)
+        // {
+        //     if(index.name == 'sad')
+        //     {
+        //     }
+        //     else
+        //     {
+        //         const emoji = new Sprite(Assets.get(index.name));
+        //         this.app.stage.addChild(emoji);
+        //         // this.Emojis.push({alias:index.name,asset:emoji});
+        //         emoji.scale.set(0.75);
+        //         emoji.visible = false;
+        //     }
+        // }
         this.updateDialogue(0);
     }
     private counter = 0;
 
     private updateDialogue(dialogueIndex:number)
     {
+        this.dialogueEmoji.style.display = 'none';
         for(let index of this.Avatars)
         {
             index.asset.visible = false;
         }
-        for(let index of this.Emojis)
-        {
-            index.asset.visible = false;
-        }
+        // for(let index of this.Emojis)
+        // {
+        //     index.asset.visible = false;
+        // }
         const speakerName = this.APIResponse.dialogue[dialogueIndex].name;
         let SpeakerAvatar : DialogueObject|undefined = undefined;
         for(let index of this.Avatars)
@@ -141,26 +150,47 @@ export class MagicWords
         const dialogue = this.APIResponse.dialogue[dialogueIndex].text;
         const Emotion = this.getEmotion(dialogue);
         console.log(dialogueIndex,Emotion);
-        if(Emotion != undefined)
+        if(Emotion == undefined)
         {
-            for(let index of this.Emojis)
-            {
-                if(index.alias == Emotion && !!SpeakerAvatar)
-                {
-                    index.asset.visible = true;
-                    index.asset.x = SpeakerAvatar.asset.x;
-                    index.asset.y = this.app.screen.height - 150 - SpeakerAvatar.asset.height - 10 - index.asset.height;
-                }
+            this.dialogueHolder1.innerText = dialogue;
+            this.dialogueHolder2.innerText = "";
+            this.dialogueEmoji.style.display = 'none';
+            // for(let index of this.Emojis)
+            // {
+            //     if(index.alias == Emotion && !!SpeakerAvatar)
+            //     {
+            //         index.asset.visible = true;
+            //         index.asset.x = SpeakerAvatar.asset.x;
+            //         index.asset.y = this.app.screen.height - 150 - SpeakerAvatar.asset.height - 10 - index.asset.height;
+            //     }
 
+            // }
+        }
+        else
+        {
+            let image_src;
+            for(let index of this.APIResponse.emojies)
+            {
+                if(index.name == Emotion)
+                {
+                    image_src = index.url
+                }
             }
+            if(!!image_src)
+            {
+                this.dialogueEmoji.src = image_src
+                this.dialogueEmoji.style.display = 'block';
+            }
+            this.dialogueHolder1.innerText = this.trimDialogue(dialogue,0);
+            this.dialogueHolder2.innerText = this.trimDialogue(dialogue,1);
         }
 
         setTimeout(() =>
         {
             this.counter += 1;
             this.counter > this.APIResponse.dialogue.length-1 ? '' : this.updateDialogue(this.counter);
-        }, 2500);
-        this.dialogueHolder.innerText = this.trimDialogue(dialogue);
+        }, this.dialoguePause);
+
     }
 
     private getEmotion(diag:string)
@@ -172,17 +202,17 @@ export class MagicWords
         return emotion;
     }
 
-    private trimDialogue(diag:string):string
+    private trimDialogue(diag:string,section:number):string
     {
         let dialogueString = diag
         const [tagstart,tagend] = [dialogueString.indexOf(`{`),dialogueString.indexOf(`}`)];
-        if(tagend==-1 || tagstart == -1) return dialogueString;
+        if(tagend==-1 || tagstart == -1) return section == 0 ? dialogueString : "";
         // console.log(tagstart,tagend);
 
         const [diag1,diag2] = [diag.substring(0,tagstart-1),diag.substring(tagend+1)];
-        console.log(diag2);
+        // console.log(diag2);
 
-        return `${diag1}${diag2}`;
+        return section == 0 ? `${diag1} `:` ${diag2}`;
     }
 
     public reset()
