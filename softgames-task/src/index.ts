@@ -2,6 +2,7 @@ import {Application, Text} from 'pixi.js';
 import { manager } from './utilities/manager';
 import {MenuManager} from "./utilities/MenuManager"
 import {AceOfShadows} from "./experiences/AoC.ts"
+import {PheonixFire} from "./experiences/PF.ts"
 
 const app = new Application();
 
@@ -67,7 +68,7 @@ class MainMenu
 			break;
 		case 'PF':
 			console.log('pheonix Flame')
-			// this.manager.changeScene(new PF(this.app))
+			this.manager.changeScene(new PheonixFire(this.app))
 			break;
 		}
 	}
