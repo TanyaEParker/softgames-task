@@ -18,12 +18,15 @@ export class MagicWords
     private Avatars : DialogueObject[] = [];
     private Emojis : DialogueObject[] = [];
     private dialogueBox : HTMLDivElement;
+    private dialogueHolder : HTMLSpanElement;
     // private avatarImages :{alias:string,src:string,parser:'texture'}[] = [];
     // private emojiImages :{alias:string,src:string,parser:'texture'}[] = [];
 
     constructor(app:Application)
     {
         this.dialogueBox = document.getElementById('MWDiaglouge') as HTMLDivElement;
+        this.dialogueHolder = document.getElementById('MWDialogueHolder') as HTMLSpanElement;
+
         if(!!this.dialogueBox)
         {
             this.dialogueBox.style = 'flex';
@@ -81,7 +84,7 @@ export class MagicWords
         // }
         // return;
     };
-    private sidePadding = 35;
+    private sidePadding = 40;
     private loadAssets()
     {
         for(let index of this.APIResponse.avatars)
@@ -157,7 +160,7 @@ export class MagicWords
             this.counter += 1;
             this.counter > this.APIResponse.dialogue.length-1 ? '' : this.updateDialogue(this.counter);
         }, 2500);
-        this.dialogueBox.innerText = this.trimDialogue(dialogue);
+        this.dialogueHolder.innerText = this.trimDialogue(dialogue);
     }
 
     private getEmotion(diag:string)
