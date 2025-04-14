@@ -93,64 +93,8 @@ export class PheonixFire
 		})
 	};
 
-// public async init(): Promise<void> {
-//     this.app.renderer.background.color = '0x000000'
-
-//     await Assets.load(this.images);
-
-//     this.displacement.texture = Assets.get('displacement');
-//     this.displacement.sprite = new Sprite(this.displacement.texture);
-//     this.displacement.sprite.x = (this.app.screen.height / 2)+this.textureSize*2,
-//     this.displacement.sprite.y = (this.app.screen.height / 2);
-//     this.displacement.sprite.alpha = 1;
-//     this.displacement.sprite.scale.set(4);
-//     this.app.stage.addChild(this.displacement.sprite);
-//     const displacementFilter = new DisplacementFilter(this.displacement.sprite);
-
-//     const texture: Texture = Assets.get(`mote2`);
-//     const ropeLength = 918 / 20;
-
-//     let points: Point[] = [];
-//     for (let i = 0; i < 10; i++)
-//     {
-//         points.push(new Point(i * ropeLength, 0));
-//     }
-
-//     const strip = new MeshRope({ texture, points });
-//     strip.x = (this.app.screen.width /2)-this.textureSize;
-//     strip.y = (this.app.screen.height)-(this.textureSize*0.8)
-//     strip.rotation = -Math.PI/2;
-//     strip.scale.set(2)
-//     this.app.stage.addChild(strip);
-
-//     const particle = new Sprite(texture);
-//     particle.x = (this.app.screen.width /2)-this.textureSize;
-//     particle.y = (this.app.screen.height)-(this.textureSize*1.6)
-//     particle.alpha = 0.5;
-//     particle.scale.set(2);
-//     this.app.stage.addChild(particle);
-//     this.particles.push(particle);
-//     particle.filters = [displacementFilter];
-
-//     gsap.to(this.displacement.sprite, {
-//       x: (this.app.screen.width /2)-this.textureSize*2,
-//       y: (this.app.screen.height)-(this.textureSize*3),
-//       duration: 6,
-//       repeat: -1,
-//       yoyo: true,
-//       ease: 'sine.inOut',
-//     });
-    
-//     let count = 0;
-//     this.app.ticker.add(() =>
-//     {
-//       count += 0.1;
-//       for (let i = 0; i < points.length; i++)
-//       {
-//         points[i].x = Math.sin(i * 0.5 + count) *2;
-//         points[i].y = i * ropeLength + Math.cos(i * 0.3 + count) *2;
-//       }
-//     })
-
-//   }
+    public reset()
+    {
+        
+    };
 }

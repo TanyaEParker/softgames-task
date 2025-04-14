@@ -21,4 +21,9 @@ export class AceOfShadows
 		this.app.renderer.background.color = '#402d5a';
 		console.log(this.cards);
 	};
+
+	public reset()
+    {
+        
+    };
 }

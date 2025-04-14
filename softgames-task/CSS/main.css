@@ -64,3 +64,21 @@ h1
   border: 2px solid black;
   border-radius: 10px;
 }
+
+.mwdialogue
+{
+  line-height: 150px;
+  color: var(--gradientTop);
+  font-weight: bold;
+  font-family: sans-serif;
+  vertical-align: middle;
+  text-align: center;
+  width: 90dvw;
+  background: rgb(128, 128, 128);
+  height: 150px;
+  position: absolute;
+  left: 5dvw;
+  bottom: 25px;
+  border: 4px solid var(--gradientBottom);
+  border-radius: 25px;
+}

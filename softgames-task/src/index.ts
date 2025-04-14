@@ -3,6 +3,7 @@ import { manager } from './utilities/manager';
 import {MenuManager} from "./utilities/MenuManager"
 import {AceOfShadows} from "./experiences/AoC.ts"
 import {PheonixFire} from "./experiences/PF.ts"
+import { MagicWords } from './experiences/MW.ts';
 
 const app = new Application();
 
@@ -64,7 +65,7 @@ class MainMenu
 			break;
 		case 'MW':
 			console.log('Magic Words');
-			// this.manager.changeScene(new MW(this.app))
+			this.manager.changeScene(new MagicWords(this.app))
 			break;
 		case 'PF':
 			console.log('pheonix Flame')
