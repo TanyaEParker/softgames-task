@@ -1,6 +1,8 @@
 import {Application, Text} from 'pixi.js';
 import { manager } from './utilities/manager';
 import {MenuManager} from "./utilities/MenuManager"
+import {AceOfShadows} from "./experiences/AoC.ts"
+
 const app = new Application();
 
 async function setup()
@@ -28,6 +30,7 @@ class MainMenu
 	private manager : manager;
 	private FPS : Text;
 	private MenuScreen :MenuManager
+
 	constructor(app:Application)
 	{
 		this.app = app;
@@ -49,21 +52,22 @@ class MainMenu
 		this.FPS.text = `FPS: ${frame}`
 	}
 
-	private setScene(task:string):void
+	private setScene = (task:string)=>
 	{
 		switch(task)
 		{
 		case 'AoC':
 			console.log('Ace of Shadows');
-			this.sceneManager.loadScene(new AoC(this.app))
+			// this.manager.setScene('AoC')
+			this.manager.changeScene(new AceOfShadows(this.app))
 			break;
 		case 'MW':
 			console.log('Magic Words');
-			this.sceneManager.loadScene(new MW(this.app))
+			// this.manager.changeScene(new MW(this.app))
 			break;
 		case 'PF':
 			console.log('pheonix Flame')
-			this.sceneManager.loadScene(new PF(this.app))
+			// this.manager.changeScene(new PF(this.app))
 			break;
 		}
 	}

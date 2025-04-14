@@ -1,9 +1,9 @@
 import { Application, Text } from 'pixi.js';
-import {MenuManager} from "./MenuManager"
+import {AceOfShadows} from "./experiences/AoC.ts"
 export class manager
 {
   private app: Application;
-  private currentScene: any;
+  private currentScene: AceOfShadows;
   private FPS : Text;
 
   constructor(app: Application, FPS: Text)
@@ -12,7 +12,7 @@ export class manager
     this.FPS = FPS;
   }
 
-  public changeScene(newScene: any): void
+  public changeScene(newScene: AceOfShadows): void
   {
     if (this.currentScene)
     {
@@ -32,6 +32,5 @@ export class manager
     this.currentScene = newScene;
     this.currentScene.init();
 
-    const MainMenu = new MenuManager()
   }
 }

@@ -1,5 +1,3 @@
-import { Application} from 'pixi.js';
-
 export class MenuManager
 {
 	private MainMenu;
