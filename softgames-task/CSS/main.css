@@ -1,6 +1,64 @@
+:root {
+  --gradientTop: #6b078c;
+  --gradientBottom: #402d5a;
+}
+
+html,body
+{
+  background-image: linear-gradient(var(--gradientTop),var(--gradientBottom));
+  padding: 0;
+  margin: 0;
+}
+
+h1
+{
+  font-family: "Freckle Face";
+  text-shadow: 0px 5px rgba(0, 0, 0, 0.5);
+}
+
 .freckle-face-regular
 {
   font-family: "Freckle Face", system-ui;
   font-weight: 400;
   font-style: normal;
+}
+.particles
+{
+  background: transparent;
+  position: absolute;
+  width: 100dvw;
+  height: 100dvh;
+}
+.background
+{
+  background: transparent;
+  width: 100dvw;
+  height: 100dvh; 
+  display: flex;
+  z-index: 1;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
+.menu
+{
+  background: rgba(128, 128, 128, 0.5);
+  width: 90dvw;
+  max-width: 400px;
+  height: 60dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 25px;
+  border: 5px solid black;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.menuButton
+{
+  background-image: linear-gradient(var(--gradientTop),var(--gradientBottom));
+  width: 70%;
+  border: 2px solid black;  
 }
